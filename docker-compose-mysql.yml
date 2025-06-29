@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: my-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678 # MySQL root 계정 비밀번호
+      MYSQL_DATABASE: core     # 초기 생성할 데이터베이스 이름
+      MYSQL_USER: msj9965                 # Spring 프로젝트에서 사용할 사용자 이름 (선택 사항)
+      MYSQL_PASSWORD: 12345678         # Spring 프로젝트에서 사용할 사용자 비밀번호 (선택 사항)
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql # 데이터 지속성을 위한 볼륨 마운트
+    command: --default-authentication-plugin=mysql_native_password # Spring Boot 2.x 버전에서 MySQL 8.x 연결 시 필요한 설정 (선택 사항)
+    healthcheck: # 컨테이너 상태 확인 (선택 사항)
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+volumes:
+  mysql_data: # named volume 정의
