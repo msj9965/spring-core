@@ -2,9 +2,10 @@ package hello.core.member;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MemoryMemberRepository implements  MemberRepository {
-    private static Map<Long, Member> store = new HashMap<>();
+    private static Map<Long, Member> store = new HashMap<>(); //ConcurrentHashMap 알아보기
     @Override
     public void save(Member member) {
         store.put(member.getId(), member);
