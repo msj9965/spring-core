@@ -7,8 +7,14 @@ import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService {
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-    private DiscountPolicy discountPolicy;
+    private final MemberRepository memberRepository ;
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+
+    private final DiscountPolicy discountPolicy;
     //NPE 발생 누군가 OrderServiceImpl에 DiscountPolicy의 구체 클래스를 주입해 주어야 함.
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
