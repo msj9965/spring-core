@@ -40,6 +40,7 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
+    implementation'org.springframework.boot:spring-boot-starter-web'
 }
 
 tasks.named('test') {
